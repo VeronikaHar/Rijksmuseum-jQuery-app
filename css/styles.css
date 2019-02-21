@@ -1,7 +1,7 @@
 :root {
   --heading-font: 'Dosis', sans-serif;
   --heading-font-color: #fff;
-  --btn-color: #113c47;
+  --btn-color: #1a5563;
   --white: #fff;
   --gap: 10px;
   --font-weight: 600;
@@ -65,7 +65,7 @@ h1 {
   font-family: var(--heading-font);
   font-size: 48px;
   font-weight: var(--font-weight);
-  color: var(--heading-font-color);
+  color: var(--white);
   text-shadow: var(--shadow);
   padding-left: var(--gap);
 }
@@ -74,16 +74,12 @@ h2 {
   font-family: var(--heading-font);
   font-size: var(--font-size-h);
   font-weight: var(--font-weight);
-  color: var(--heading-font-color);
-  text-shadow: var(--shadow);
 }
 
 h3 {
   font-family: var(--heading-font);
   font-size: var(--font-size-basic);
   font-weight: var(--font-weight);
-  color: var(--heading-font-color);
-  text-shadow: var(--shadow);
 }
 
 header {
@@ -138,36 +134,34 @@ header {
 
 .modal {
   margin: auto;
-  background-image: url('');
-  background-size: cover;
+  background-color: var(--white);
   display: inline-block;
   box-sizing: border-box;
   padding: 15px;
   width: 100%;
-  max-width: 600px;
-  text-align: left;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  max-width: 630px;
+  text-align: center;
 }
 
 .modal-close {
   float: right;
   border: 0;
   border-radius: var(--radius);
-  background: #aa0c0c;
+  background: var(--btn-color);
   color: var(--white);
   text-decoration: none;
   text-align: center;
   font-family: var(--heading-font);
   font-size: 18px;
-  box-shadow: var(--shadow);
+  width: 150px;
+  box-shadow: 4px 3px 20px grey;
   margin: 15px;
 }
 
 .modal-close:hover,
 .modal-close:focus {
   cursor: pointer;
-  background-color: #e71212;
+  background-color: #aa0c0c;
 }
 
 .modal-close:active {
@@ -177,14 +171,9 @@ header {
 .modal p {
   padding: 8px;
   margin: var(--gap);
-  background: rgb(233, 232, 232);
+  background: #e8ecec;
   border-radius: var(--radius);
   text-align: left;
-}
-
-.modal h2 {
-  margin-left: 15px;
-  color:#e71212;
 }
 
 span {
