@@ -74,8 +74,9 @@
 
      // loadDetails(object).then(() => {
         var objectName=object.longTitle;
+        var hyperlink=$('<a>').attr('href', object.links.web).text('click here') ; /* this doesn't work either  $('<a href="'+object.links.web+'">click here</a>')*/
         var objectDetails = 'Object Number: ' + object.objectNumber
-        +'\nFor more details '+ $('<a href="'+object.links.web+'">click here</a>') +'.' ;
+        +'\nFor more details '+ hyperlink +'.' ;
         showModal(objectName, objectDetails);
       //});
 
