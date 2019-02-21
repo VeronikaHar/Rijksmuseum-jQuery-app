@@ -8,7 +8,6 @@
   --font-weight: 600;
   --font-size-basic: 20px;
   --font-size-h: 38px;
-  --shadow: 4px 3px 20px #fff;
   --radius: 7px;
 }
 
@@ -40,7 +39,6 @@ button {
   text-decoration: none;
   padding: var(--gap);
   border-radius: 50%;
-  box-shadow: var(--shadow);
   transition-duration: 0.5s opacity;
   width: auto;
   margin: var(--gap);
@@ -48,18 +46,19 @@ button {
 }
 
 .btn-primary {
-  background-color: var(--btn-color);
+  background-color: transparent;
   color: var(--white);
-  opacity: 0.9;
-  border: 1px solid #ddd; /* Add a grey border */
+  border: 2px solid #ddd; /* Add a grey border */
   border-radius: var(--radius);
   width: 200px;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
+  background-color: var(--btn-color);
+  transition-duration: 0.7s opacity;
   cursor: pointer;
-  opacity: 1;
+  opacity: 0.9;
 }
 
 h1 {
@@ -67,7 +66,6 @@ h1 {
   font-size: 48px;
   font-weight: var(--font-weight);
   color: var(--white);
-  text-shadow: var(--shadow);
   padding-left: var(--gap);
 }
 
@@ -159,6 +157,7 @@ img {
   border: 0;
   border-radius: var(--radius);
   background: var(--btn-color);
+  transition: 0.3s;
   color: var(--white);
   text-decoration: none;
   text-align: center;
@@ -206,7 +205,6 @@ span {
 #thumb-w-bg:hover,
 #thumb-w-bg:focus {
   cursor: pointer;
-  background-color: var(--white);
   opacity: 0.2;
 }
 
@@ -237,9 +235,11 @@ span {
   font-size: 16px;
 }
 
-button:hover .title {
+button:hover .title,
+button:focus .title {
   visibility: visible;
-  opacity: 1;
+  opacity: 0.8;
+  background: var(--white);
 }
 
 #query {
