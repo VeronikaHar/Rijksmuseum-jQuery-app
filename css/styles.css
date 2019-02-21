@@ -2,6 +2,7 @@
   --heading-font: 'Dosis', sans-serif;
   --heading-font-color: #fff;
   --btn-color: #1a5563;
+  --dark-red: #8d1731;
   --white: #fff;
   --gap: 10px;
   --font-weight: 600;
@@ -74,6 +75,12 @@ h2 {
   font-family: var(--heading-font);
   font-size: var(--font-size-h);
   font-weight: var(--font-weight);
+  color: var(--white);
+  margin: 70px auto;
+  max-width: 400px;
+  background: var(--dark-red);
+  opacity: 0.8;
+  
 }
 
 h3 {
@@ -86,6 +93,10 @@ header {
   display: inline-flex;
   flex-direction: column;
   text-align: center;
+  width: 100%;
+}
+
+img {
   width: 100%;
 }
 
@@ -135,7 +146,7 @@ header {
 .modal {
   margin: auto;
   background-color: var(--white);
-  display: inline-block;
+  display: inline-flexbox;
   box-sizing: border-box;
   padding: 15px;
   width: 100%;
@@ -161,7 +172,7 @@ header {
 .modal-close:hover,
 .modal-close:focus {
   cursor: pointer;
-  background-color: #aa0c0c;
+  background-color: var(--dark-red);
 }
 
 .modal-close:active {

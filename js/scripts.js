@@ -12,19 +12,22 @@
       var $div = $('#result-container');
       $div.html('');
 
-      // create a button for each art object found
-      $.each(results.artObjects, function (index, object) {
-        console.log(object);
+      if (results.artObjects.length === 0) {
+        $div.html('<h2>No results found...</h2>');
+      } else {
+        // create a button for each art object found
+        $.each(results.artObjects, function (index, object) {
 
-        var $btn = $('<button class="thumbnail">' + '</button>').appendTo($div);
-        $btn.append(thumbnail(object));
-        $btn.append(title(object));
+          var $btn = $('<button class="thumbnail">' + '</button>').appendTo($div);
+          $btn.append(thumbnail(object));
+          $btn.append(title(object));
 
-        // make each btn clickable, showing the modal with details
-        $btn.on('click', () => {
-          showDetails(object);
-        }); 
-      })
+          // make each btn clickable, showing the modal with details
+          $btn.on('click', () => {
+            showDetails(object);
+          });
+        });
+      }
     });
   });
 
@@ -59,9 +62,9 @@
 
         //Add new modal content
         modal.append($('<img>').attr('src', object.webImage.url.replace("s0", "s600")))
-        .append($('<h3>').text(title))
-        .append($('<p>').text(text))
-        .append($('<button>').addClass('modal-close').text('Close'));
+          .append($('<h3>').text(title))
+          .append($('<p>').text(text))
+          .append($('<button>').addClass('modal-close').text('Close'));
 
         $('<button class="modal-close">').on('click', () => {
           hideModal;
@@ -72,12 +75,12 @@
         $modalContainer.removeClass('is-visible');
       }
 
-     // loadDetails(object).then(() => {
-        var objectName=object.longTitle;
-        var hyperlink=$('<a>').attr('href', object.links.web).text('click here') ; /* this doesn't work either  $('<a href="'+object.links.web+'">click here</a>')*/
-        var objectDetails = 'Object Number: ' + object.objectNumber
-        +'\nFor more details '+ hyperlink +'.' ;
-        showModal(objectName, objectDetails);
+      // loadDetails(object).then(() => {
+      var objectName = object.longTitle;
+      var hyperlink = $('<a>').attr('href', object.links.web).text('click here'); /* this doesn't work either  $('<a href="'+object.links.web+'">click here</a>')*/
+      var objectDetails = 'Object Number: ' + object.objectNumber +
+        '\nFor more details ' + hyperlink + '.';
+      showModal(objectName, objectDetails);
       //});
 
       //Close modal by pressing ESC on the keyboard
