@@ -51,6 +51,12 @@
   function showDetails(object) {
     (() => {
       var $modalContainer = $('#modal-container');
+      var imgEl=$('<img>');
+        if (object.webImage !== null) {
+           imgEl.attr('src', object.webImage.url.replace("s0", "s600"));
+        } else {
+          imgEl.attr('id', 'thumb-w-bg');
+        };
 
       function showModal(title, text) {
         // Clear all existing modal content
@@ -59,22 +65,18 @@
         var modal = $('<div>').addClass('modal');
         $modalContainer.append(modal);
         $modalContainer.addClass('is-visible');
-
+        
         //Add new modal content
-        modal.append($('<img>').attr('src', object.webImage.url.replace("s0", "s600")))
+        modal.append(imgEl)
           .append($('<h3>').text(title))
           .append($('<p>').text(text))
           .append($('<button>').addClass('modal-close').text('Close'));
-
-        $('<button class="modal-close">').on('click', () => {
-          hideModal;
-        });
       }
 
       function hideModal() {
         $modalContainer.removeClass('is-visible');
       }
-
+    
       // loadDetails(object).then(() => {
       var objectName = object.longTitle;
       var hyperlink = $('<a>').attr('href', object.links.web).text('click here'); /* this doesn't work either  $('<a href="'+object.links.web+'">click here</a>')*/
@@ -83,18 +85,25 @@
       showModal(objectName, objectDetails);
       //});
 
-      //Close modal by pressing ESC on the keyboard
-      window.on('keydown', (e) => {
-        if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+      //Close modal by: a) pressing ESC on the keyboard
+      $(window).on('keydown', (e) => {
+        if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
           hideModal();
         }
       });
 
-      $modalContainer.on('click', (e) => {
-        var target = e.target;
-        if (target === $modalContainer) {
+      // b) clicking Close button
+      $('.modal-close').click(() => {
+        hideModal();
+      });
+
+      // c) clicking outside the modal
+      $modalContainer.click((event) => {
+        var target = $(event.target);
+        if (target.is($modalContainer)) {
           hideModal();
         }
       });
     })();
   }
+
