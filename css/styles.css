@@ -44,8 +44,8 @@ button {
   text-decoration: none;
   padding: var(--gap);
   border-radius: 50%;
-  transition-duration: 0.5s opacity;
   width: auto;
+  transition: all 0.2s ease-in-out;
   margin: var(--gap);
   position: relative;
 }
@@ -191,17 +191,13 @@ img {
   text-align: left;
 }
 
-span {
-  font-family: var(--heading-font);
-  font-weight: var(--font-weight);
-}
-
 .thumb {
   width: 280px;
   height: 280px;
   border-radius: 50%;
   border: none;
   background-size: cover;
+  background-position: center center;
   background-color: var(--white);
 }
 
@@ -211,12 +207,7 @@ span {
 #thumb-w-bg:focus {
   cursor: pointer;
   opacity: 0.2;
-}
-
-.thumb:active,
-.btn-primary:active,
-#thumb-w-bg:active {
-  box-shadow: none;
+  transition: all 0.2s ease-in-out;
 }
 
 #thumb-w-bg {
@@ -231,20 +222,35 @@ span {
 
 .title {
   position: absolute;
-  top: 40%;
-  left: 2%;
-  right: 2%;
+  top: 35%;
+  left: 4%;
+  right: 4%;
   visibility: hidden;
   opacity: 0;
   text-align: center;
   font-size: 16px;
+  transform: translate(0px, -200px);
+  transition: all 0.2s ease-in-out;
+  flex-wrap: ;
 }
 
 button:hover .title,
 button:focus .title {
+  cursor: pointer;
   visibility: visible;
   opacity: 0.8;
-  background: var(--white);
+  transform: translate(0px, 0px);
+}
+
+button:hover .title h3 {
+  font-size: 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 0px var(--gap);
+}
+
+button:hover .title p {
+  transition-delay: 0.4s;
+  font-style: italic;
 }
 
 #query {

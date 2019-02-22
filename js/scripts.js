@@ -23,9 +23,7 @@ var artResults = (() => {
         $.each(results.artObjects, function (index, object) {
 
           var $btn = $('<button class="thumbnail">' + '</button>').appendTo($div);
-          $btn.append(thumbnail(object))
-          .append($('<div>').attr('id','mask'))
-          .append(title(object));
+          $btn.append(title(object)).append(thumbnail(object));
 
           // make each btn clickable, showing the modal with details
           $btn.on('click', () => {
@@ -63,7 +61,7 @@ var artResults = (() => {
   // creates title and author info for the specified art object
   function title(object) {
     return $('<div class="title">' + '<h3>' + object.title + '</h3>' + '<p>' +
-      'by '  + object.principalOrFirstMaker+ '</p>' + '</div>');
+      'by '+'<br>'  + object.principalOrFirstMaker+ '</p>' + '</div>');
   }
 })();
 
@@ -85,7 +83,7 @@ function showDetails(object) {
         console.log(details.responseJSON);
                 
       }).catch( (e) => {
-          console.error(e);
+          console.error(e);          
       });
     }
 
