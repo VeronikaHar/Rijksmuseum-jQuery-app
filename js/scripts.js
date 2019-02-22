@@ -23,8 +23,9 @@ var artResults = (() => {
         $.each(results.artObjects, function (index, object) {
 
           var $btn = $('<button class="thumbnail">' + '</button>').appendTo($div);
-          $btn.append(thumbnail(object));
-          $btn.append(title(object));
+          $btn.append(thumbnail(object))
+          .append($('<div>').attr('id','mask'))
+          .append(title(object));
 
           // make each btn clickable, showing the modal with details
           $btn.on('click', () => {
@@ -61,8 +62,8 @@ var artResults = (() => {
 
   // creates title and author info for the specified art object
   function title(object) {
-    return $('<div class="title">' + '<span>' + object.title + '</span>' + '<br>' +
-      'by ' + '<br>' + object.principalOrFirstMaker + '</div>');
+    return $('<div class="title">' + '<h3>' + object.title + '</h3>' + '<p>' +
+      'by '  + object.principalOrFirstMaker+ '</p>' + '</div>');
   }
 })();
 
@@ -78,18 +79,18 @@ function showDetails(object) {
     };
 
     function loadDetails(object) {
-      var url='http://cors.io/?'+object.links.web
+      var url='https://cors.io/?'+object.links.web
       $.ajax(url, { dataType: 'json' }).then( (details) => {
         // Now we add the details to the art object item
         console.log(details.responseJSON);
                 
       }).catch( (e) => {
-        console.error(e);
+          console.error(e);
       });
     }
 
     loadDetails(object);
-    
+
     function showModal() {
       // Clear all existing modal content
       $modalContainer.empty();
