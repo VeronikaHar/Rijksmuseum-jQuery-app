@@ -59,64 +59,60 @@ var artResults = (() => {
     return $('<div class="title">' + '<span>' + object.title + '</span>' + '<br>' +
       'by ' + '<br>' + object.principalOrFirstMaker + '</div>');
   }
+})();
 
-  // Function that collects art object details
-  function showDetails(object) {
-    (() => {
-      var $modalContainer = $('#modal-container');
-      var imgEl=$('<img>');
-        if (object.webImage !== null) {
-           imgEl.attr('src', object.webImage.url.replace("s0", "s600"));
-        } else {
-          imgEl.attr('id', 'thumb-w-bg');
-        };
+// Function that collects art object details and displays it in a modal
+function showDetails(object) {
+  (() => {
+    var $modalContainer = $('#modal-container');
+    var imgEl = $('<img>');
+    if (object.webImage !== null) {
+      imgEl.attr('src', object.webImage.url.replace("s0", "s600"));
+    } else {
+      imgEl.attr('id', 'thumb-w-bg');
+    };
 
-      function showModal(title, text) {
-        // Clear all existing modal content
-        $modalContainer.empty();
+    function showModal() {
+      // Clear all existing modal content
+      $modalContainer.empty();
 
-        var modal = $('<div>').addClass('modal');
-        $modalContainer.append(modal);
-        $modalContainer.addClass('is-visible');
-        
-        //Add new modal content
-        modal.append(imgEl)
-          .append($('<h3>').text(title))
-          .append($('<p>').text(text))
-          .append($('<button>').addClass('modal-close').text('Close'));
-      }
+      var modal = $('<div>').addClass('modal');
+      $modalContainer.append(modal);
+      $modalContainer.addClass('is-visible');
 
-      function hideModal() {
-        $modalContainer.removeClass('is-visible');
-      }
-    
-      // loadDetails(object).then(() => {
-      var objectName = object.longTitle;
-      var hyperlink = $('<a>').attr('href', object.links.web).text('click here'); /* this doesn't work either  $('<a href="'+object.links.web+'">click here</a>')*/
-      var objectDetails = 'Object Number: ' + object.objectNumber +
-        '\nFor more details ' + hyperlink + '.';
-      showModal(objectName, objectDetails);
-      //});
+      var hyperlink = $('<a>').attr('href', object.links.web).attr('target', '_blank').text('click here');
 
-      //Close modal by: a) pressing ESC on the keyboard
-      $(window).on('keydown', (e) => {
-        if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
-          hideModal();
-        }
-      });
+      //Add new modal content
+      modal.append(imgEl)
+        .append($('<h3>').text(object.longTitle))
+        .append($('<p>').html('Art Object Number: ' + object.objectNumber + '<br>' + 'For more details ').append(hyperlink))
+        .append($('<button>').addClass('modal-close').text('Close'));
+    };
 
-      // b) clicking Close button
-      $('.modal-close').click(() => {
+    function hideModal() {
+      $modalContainer.removeClass('is-visible');
+    };
+
+    showModal();
+
+    //Close modal by: a) pressing ESC on the keyboard
+    $(window).on('keydown', (e) => {
+      if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
         hideModal();
-      });
+      }
+    });
 
-      // c) clicking outside the modal
-      $modalContainer.click((event) => {
-        var target = $(event.target);
-        if (target.is($modalContainer)) {
-          hideModal();
-        }
-      });
-    })();
-  }
+    // b) clicking Close button
+    $('.modal-close').click(() => {
+      hideModal();
+    });
 
+    // c) clicking outside the modal
+    $modalContainer.click((event) => {
+      var target = $(event.target);
+      if (target.is($modalContainer)) {
+        hideModal();
+      }
+    });
+  })();
+}
