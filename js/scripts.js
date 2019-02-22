@@ -77,6 +77,19 @@ function showDetails(object) {
       imgEl.attr('id', 'thumb-w-bg');
     };
 
+    function loadDetails(object) {
+      var url='http://cors.io/?'+object.links.web
+      $.ajax(url, { dataType: 'json' }).then( (details) => {
+        // Now we add the details to the art object item
+        console.log(details.responseJSON);
+                
+      }).catch( (e) => {
+        console.error(e);
+      });
+    }
+
+    loadDetails(object);
+    
     function showModal() {
       // Clear all existing modal content
       $modalContainer.empty();
