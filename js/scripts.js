@@ -1,10 +1,11 @@
+var artResults = (() => {
   // search the collection using a JSON call
   function search(query) {
     return $.getJSON(`https://www.rijksmuseum.nl/api/en/collection?q=${query}&key=XaEeFrSV&format=json`);
   }
 
-  let searchBox = $('#query');
-  $("#search-btn").click(() => {
+  function fireSearch() {
+    let searchBox = $('#query');
 
     // fire the search query
     search(searchBox.val()).done(function (results) {
@@ -29,6 +30,18 @@
         });
       }
     });
+  }
+
+  //Search by clicking Search btn
+  $('#search-btn').click(() => {
+    fireSearch()
+  });
+
+  //Search by pressing Enter on keyboard
+  $('#query').on('keydown', (e) => {
+    if (e.key === 'Enter'){
+      fireSearch()
+    }
   });
 
   // creates a thumbnail image for the specified art object
