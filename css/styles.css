@@ -15,6 +15,11 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration-style: dotted;
+  color: var(--dark-red);
+}
+
 body {
   background-image: url('rijks_background.jpg'); 
   background-size:cover;
