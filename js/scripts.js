@@ -4,11 +4,14 @@ var artResults = (() => {
     return $.getJSON(`https://www.rijksmuseum.nl/api/en/collection?q=${query}&key=XaEeFrSV&format=json`);
   }
 
-  function fireSearch() {
-    let searchBox = $('#query');
+  $(function() {
+    fireSearch('artists');
+  });
 
+  function fireSearch(entry) {
+    
     // fire the search query
-    search(searchBox.val()).done(function (results) {
+    search(entry).done(function (results) {
       $('#result-container').empty();
       var $div = $('#result-container');
       $div.html('');
@@ -32,15 +35,17 @@ var artResults = (() => {
     });
   }
 
+  let searchBox = $('#query');
+  
   //Search by clicking Search btn
   $('#search-btn').click(() => {
-    fireSearch()
+    fireSearch(searchBox.val());
   });
 
   //Search by pressing Enter on keyboard
   $('#query').on('keydown', (e) => {
     if (e.key === 'Enter'){
-      fireSearch()
+      fireSearch(searchBox.val());
     }
   });
 
