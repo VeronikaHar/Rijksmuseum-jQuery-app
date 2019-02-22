@@ -77,17 +77,21 @@ function showDetails(object) {
     };
 
     function loadDetails(object) {
-      var url='https://cors.io/?'+object.links.web
+      var url='https://cors.io/?'+object.links.self+'?key=XaEeFrSV&format=json'
       $.ajax(url, { dataType: 'json' }).then( (details) => {
+        
         // Now we add the details to the art object item
-        console.log(details.responseJSON);
-                
+        object.artDescr=details.artObject.label.description;
+        object.artMedium=details.artObject.physicalMedium;
+        object.artDims=details.artObject.subTitle;
       }).catch( (e) => {
           console.error(e);          
       });
     }
 
-    loadDetails(object);
+    loadDetails(object).then( () => {
+      showModal()
+    });
 
     function showModal() {
       // Clear all existing modal content
@@ -102,7 +106,7 @@ function showDetails(object) {
       //Add new modal content
       modal.append(imgEl)
         .append($('<h3>').text(object.longTitle))
-        .append($('<p>').html('Art Object Number: ' + object.objectNumber + '<br>' + 'For more details ').append(hyperlink))
+        .append($('<p>').html(object.artDescr + '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details ').append(hyperlink))
         .append($('<button>').addClass('modal-close').text('Close'));
     };
 
