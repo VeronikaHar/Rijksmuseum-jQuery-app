@@ -101,12 +101,12 @@ function showDetails(object) {
       $modalContainer.append(modal);
       $modalContainer.addClass('is-visible');
 
-      var hyperlink = $('<a>').attr('href', object.links.web).attr('target', '_blank').text('click here');
+      var hyperlink = $('<a>').attr('href', object.links.web).attr('target', '_blank').text('Rijkmuseum official site.');
 
       //Add new modal content
       modal.append(imgEl)
-        .append($('<h3>').text(object.longTitle))
-        .append($('<p>').html(object.artDescr + '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details ').append(hyperlink))
+        .append($('<h3>').html(object.longTitle+'<p>'+object.artMedium+', '+object.artDims+'</p>'))
+        .append($('<p>').html('<span>'+object.artDescr +'</span>'+ '<br>'+ '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details go to ').append(hyperlink))
         .append($('<button>').addClass('modal-close').text('Close'));
     };
 
