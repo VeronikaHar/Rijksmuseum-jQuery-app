@@ -78,12 +78,18 @@ function showDetails(object) {
 
     function loadDetails(object) {
       var url='https://cors.io/?'+object.links.self+'?key=XaEeFrSV&format=json'
-      $.ajax(url, { dataType: 'json' }).then( (details) => {
+      return $.ajax(url, { dataType: 'json' }).then( (details) => {
         
         // Now we add the details to the art object item
-        object.artDescr=details.artObject.label.description;
-        object.artMedium=details.artObject.physicalMedium;
-        object.artDims=details.artObject.subTitle;
+        if(details.artObject.label.description){
+          object.artDescr=details.artObject.label.description;
+        } else {object.artDescr='Description of the art piece is not available.'};
+        if(details.artObject.physicalMedium){
+          object.artMedium=details.artObject.physicalMedium;
+        } else {object.artMedium='unknown art medium'};
+        if(details.artObject.subTitle){
+          object.artDims=details.artObject.subTitle;
+        } else {object.artDims='dimensions not available'}
       }).catch( (e) => {
           console.error(e);          
       });
@@ -101,12 +107,12 @@ function showDetails(object) {
       $modalContainer.append(modal);
       $modalContainer.addClass('is-visible');
 
-      var hyperlink = $('<a>').attr('href', object.links.web).attr('target', '_blank').text('Rijkmuseum official site.');
+      var hyperlink = $('<a>').attr('href', object.links.web).attr('target', '_blank').text('click here');
 
       //Add new modal content
       modal.append(imgEl)
-        .append($('<h3>').html(object.longTitle+'<p>'+object.artMedium+', '+object.artDims+'</p>'))
-        .append($('<p>').html('<span>'+object.artDescr +'</span>'+ '<br>'+ '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details go to ').append(hyperlink))
+        .append($('<h3>').text(object.longTitle))
+        .append($('<p>').html(object.artDescr + '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details ').append(hyperlink))
         .append($('<button>').addClass('modal-close').text('Close'));
     };
 
