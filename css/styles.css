@@ -105,7 +105,7 @@ img {
 
 @media all and (max-width: 450px) {
   body {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   button{
@@ -166,7 +166,6 @@ img {
   text-decoration: none;
   text-align: center;
   font-family: var(--heading-font);
-  font-size: 18px;
   width: 150px;
   box-shadow: 4px 3px 20px grey;
   margin: 15px;
@@ -183,7 +182,7 @@ img {
 }
 
 .modal h3 p {
-  font: italic 500 16px 'Source Sans Pro', sans-serif;
+  font: italic 500 14px 'Source Sans Pro', sans-serif;
   background: transparent;
 }
 

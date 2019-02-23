@@ -113,7 +113,7 @@ function showDetails(object) {
       modal.append(imgEl)
         .append($('<h3>').html(object.longTitle+'<p>'+object.artMedium+', '+object.artDims+'</p>'))
         .append($('<p>').html('<span>'+object.artDescr +'</span>'+ '<br>'+ '<br>'+'Art Object Number: ' + object.objectNumber + '<br>' + 'For more details go to ').append(hyperlink))
-        .append($('<button>').addClass('modal-close').text('Close'));
+        .append($('<button>').addClass('modal-close').text('Close').click(hideModal));
     };
 
     function hideModal() {
@@ -129,12 +129,7 @@ function showDetails(object) {
       }
     });
 
-    // b) clicking Close button
-    $('.modal-close').click(() => {
-      hideModal();
-    });
-
-    // c) clicking outside the modal
+    // b) clicking outside the modal
     $modalContainer.click((event) => {
       var target = $(event.target);
       if (target.is($modalContainer)) {
